@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameroon Cultural Marriage AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="header-content">
+                <!-- <i class="fas fa-heart cultural-icon"></i> -->
+                <h1>AI chatbot</h1>
+                <p>Explore traditional rites across Cameroonian cultures</p>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="culture-selector">
+                <label for="cultureSelect">Select Culture:</label>
+                <select id="cultureSelect">
+                    <option value="">Ask about any culture</option>
+                    <option value="bamileke">Bamileke</option>
+                    <option value="bassa">Bassa</option>
+                    <option value="bakweri">Bakweri</option>
+                    <option value="fulani">Fulani</option>
+                </select>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <h3>Welcome! 🌍</h3>
+                    <p>Ask me about traditional marriage rites of any Cameroonian culture.</p>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>"What are Bamileke marriage traditions?"</li>
+                        <li>"Tell me about Bassa bride price"</li>
+                        <li>"How do Fulani people marry traditionally?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <span>Researching cultural traditions...</span>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="userInput" placeholder="Ask about Cameroonian marriage traditions...">
+                    <button id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Info Panel -->
+        <div class="cultural-info" id="culturalInfo">
+            <h4>Currently discussing: <span id="currentCulture">General Cameroonian</span></h4>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
