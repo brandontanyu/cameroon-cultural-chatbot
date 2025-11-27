@@ -43,15 +43,23 @@ async function translateToLocalDialect(text, targetLanguage){
 }
 
 function buildResponseForCulture(c){
+  // plain text — each step/tradition on its own line
   const stepsText = Array.isArray(c.marriageSteps) && c.marriageSteps.length
-    ? c.marriageSteps.map((s,i)=> ` ${i+1}. ${s}`).join('\n') : ' No specific steps available.';
+    ? c.marriageSteps.map((s,i)=> `${i+1}. ${s}`).join('\n')
+    : 'No specific steps available.';
   const traditionsText = Array.isArray(c.traditions) && c.traditions.length
-    ? c.traditions.map(t=> ` - ${t}`).join('\n') : ' No specific traditions available.';
-  const text = `Traditional marriage information for ${c.name}: Marriage steps:\n${stepsText}\nTraditions:\n${traditionsText}\nAsk for more detail on any step if you need it`;
+    ? c.traditions.map(t=> `- ${t}`).join('\n')
+    : 'No specific traditions available.';
+  const text = `Traditional marriage information for ${c.name}: Marriage steps:\n${stepsText}\n\nTraditions:\n${traditionsText}\n\nAsk for more detail on any step if you need it`;
 
-  const stepsHtml = Array.isArray(c.marriageSteps) ? c.marriageSteps.map((s,i)=> ` ${i+1}. ${escapeHtml(s)}<br>`).join('') : ' No specific steps available.<br>';
-  const traditionsHtml = Array.isArray(c.traditions) ? c.traditions.map(t=> ` - ${escapeHtml(t)}<br>`).join('') : ' No specific traditions available.<br>';
-  const html = `<div>Traditional marriage information for <strong>${escapeHtml(c.name)}</strong>:<br><strong>Marriage steps:</strong><br>${stepsHtml}<strong>Traditions:</strong><br>${traditionsHtml}<em>Ask for more detail on any step if you need it</em></div>`;
+  // HTML — preserve those breaks so browser shows each item on its own line
+  const stepsHtml = Array.isArray(c.marriageSteps) && c.marriageSteps.length
+    ? c.marriageSteps.map((s,i)=> `${i+1}. ${escapeHtml(s)}<br>`).join('')
+    : 'No specific steps available.<br>';
+  const traditionsHtml = Array.isArray(c.traditions) && c.traditions.length
+    ? c.traditions.map(t=> `- ${escapeHtml(t)}<br>`).join('')
+    : 'No specific traditions available.<br>';
+  const html = `<div>Traditional marriage information for <strong>${escapeHtml(c.name)}</strong>:<br><strong>Marriage steps:</strong><br>${stepsHtml}<br><strong>Traditions:</strong><br>${traditionsHtml}<br><em>Ask for more detail on any step if you need it</em></div>`;
 
   return { text, html };
 }

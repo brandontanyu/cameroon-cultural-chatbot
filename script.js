@@ -78,7 +78,18 @@ class CulturalChatbot {
             this.typingIndicator.style.display = 'none';
             
             // Add AI response with translation
-            this.addMessage(data.response, false, data.translation);
+            const botBubble = document.createElement('div');
+            botBubble.className = 'message bot';
+
+            if (data.responseHtml) {
+              // trusted HTML from server function — renders each step/tradition on its own line
+              botBubble.innerHTML = data.responseHtml;
+            } else {
+              // fallback: convert newlines in plain text to <br>
+              botBubble.innerHTML = (data.response || '').replace(/\n/g, '<br>');
+            }
+
+            this.chatMessages.appendChild(botBubble);
             
             // Update cultural info
             this.currentCulture.textContent = data.detectedCulture;
